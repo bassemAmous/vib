@@ -1,0 +1,102 @@
+<ul id="al-sidebar-list" class="al-sidebar-list" baSlimScroll [baSlimScrollOptions]="{height: menuHeight}"
+(mouseleave)="hoverElemTop=outOfArea">
+<ba-menu-item
+[menuItem]="item"
+(itemHover)="hoverItem($event)"
+(toggleSubMenu)="toggleSubMenu($event)"
+*ngFor="let item of menuItems"></ba-menu-item>
+<hr/>
+<!-- <ul>
+   
+      <td class="table-id" style="color:blue"><b>{{ post._id }}</b></td>
+      <li>{{ post.AlB1}}</li>
+    </ul> -->
+    <div class="form-group1 row">
+      <input type="text" class="form-control" [(ngModel)]="database" id="input05"  disabled>
+    </div>
+    <hr/>
+    <div class="form-group row" style="margin-top:1px">
+      <div style="display: inline;">
+        <img src="/assets/img/1.png" style="width:22px">
+ <!--   <button style="margin-left:79px;background:none!important;
+     color:orange;
+     border:none; 
+     padding:0!important;
+     font: inherit;
+     border-bottom:1px solid #444; 
+     cursor: pointer;">reset</button> -->
+   </div>
+   <select class="form-control" id="exampleSelect1"  >
+    <option >Betavib</option>
+    
+  </select>
+</div>
+<div class="form-group row">
+  <div style="display: inline;">
+    <img src="/assets/img/2.png" style="width:22px">
+    <button  id="onoffp" (click)="onoffFnP($event)" style="margin-left:82px;background:none!important;
+    color:green;
+    border:none; 
+    padding:0!important;
+    font: inherit;
+    border-bottom:1px solid #444; 
+    cursor: pointer;" >Off</button></div>
+
+    <select (change)="onChangeplant($event.target.value)"class="form-control" id="planttts" disabled>
+      <option *ngFor="let plant of plants">{{plant}}</option>
+    </select>
+  </div>
+
+  <div class="form-group row">
+    <div style="display: inline;">
+     
+      <img src="/assets/img/3.png" style="width:22px"> <button  id="onoff" (click)="onoffFn($event)" style="margin-left:82px;background:none!important;
+      color:green;
+      border:none; 
+      padding:0!important;
+      font: inherit;
+      border-bottom:1px solid #444; 
+      cursor: pointer;" >Off</button></div>
+      <select id="depttt" (change)="onChangedept($event.target.value)" class="form-control" disabled>
+       <option *ngFor="let dept of deptss">{{dept}}</option>
+     </select>
+
+     <hr/>
+   </div>
+
+  <!-- <div class="form-group row">
+   <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/calendar-128.png" style="width:22px">
+    <select class="form-control" id="exampleSelect1">
+    <option>1 Years</option>
+    <option>2 Years</option>
+    <option>3 Years</option>
+    <option>4 Years</option>
+    <option>5 Years</option>
+  </select>
+</div> -->
+  <!-- <div class="form-group row">
+  <h5 style="color:#e74c3c">Criticality</h5>
+    <select class="form-control" id="exampleSelect1">
+    <option>Highest</option>
+    <option>Lowest</option>
+    
+  </select>
+</div> -->
+<!--   <div class="form-group row">
+  <h4 style="color:#34495e">Route</h4>
+    <select class="form-control" id="exampleSelect1">
+    <option>Betavib</option>
+    
+  </select>
+</div> -->
+
+
+
+
+</ul>
+<div class="sidebar-hover-elem" [ngStyle]="{top: hoverElemTop + 'px', height: hoverElemHeight + 'px'}"
+[ngClass]="{'show-hover-elem': showHoverElem }">
+</div>
+
+
+

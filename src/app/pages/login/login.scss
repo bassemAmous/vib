@@ -1,0 +1,51 @@
+@import '../../theme/sass/auth';
+$break-small: 320px;
+$break-large: 1200px;
+img { 
+  
+} 
+#half2:hover { 
+  color:#209E90;
+}
+button{
+	background-color:#2ecc71;
+	width:179px;
+	margin-left:42px;
+
+}
+
+
+#half1{
+	color:#209E90;
+}
+
+
+
+
+
+
+.vib{
+	
+@media screen and (max-width: $break-small) {
+   display:none
+  }
+  @media screen and (min-width: $break-large) {
+    display:none
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

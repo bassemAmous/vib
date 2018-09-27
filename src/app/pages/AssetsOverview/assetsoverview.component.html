@@ -1,0 +1,281 @@
+<router-outlet></router-outlet> 
+<md-spinner *ngIf="isLoading" style="width:60px;background-position : center;position: fixed;
+  left: 50%;
+  top: 50%; z-index: 100;"></md-spinner>
+  <div  style="width:157px;margin-left: 770px; border-radius: 25px;">
+    <button   class="btn btn-blue" id="chartbtnn" style="background-color: #1abc9c" (click)="openCity(event, 'London','this.id')">Charts</button>
+    <button  class="btn btn-blue"  id="tabbtnn" (click)="openCity(event, 'Paris','this.id')">Table</button>
+  </div>
+  <div class="row">
+    <!-- liste machine -->
+    <div class="col-sm-2" style="clear:left;margin-left: -35px ">
+      <div class="widgets">
+        <div class="row">
+          <div class="col-md-12">
+
+            <ba-card title="Machines" >
+             <ul>
+              <div class="row" style="margin-left: -50px">
+                <div class="col-lg-6">
+                  <div class="input-group">
+                    <span class="input-group-btn" >
+                     <button  style="width:15px;margin-left: -20px" class="btn btn-default" type="button"></button>
+                   </span>
+                   <input  [(ngModel)]="query" style="width:110px" type="text" class="form-control" placeholder="Search..." (input)="filterItem(myInput.value)">
+                 </div><!-- /input-group -->
+               </div><!-- /.col-lg-6 -->
+
+             </div><!-- /.row -->
+             <div  *ngFor="let machine of data | search1:'MachineName,MachineState':query | paginate: { id:'first',itemsPerPage: 20, currentPage: p }">
+               <button (click)="machineClick(event,machine.MachineName)" *ngIf="machine.MachineState =='Gray'" style="margin-left:-60px; min-width: 167px;background-color: #95a5a6;margin-bottom:3px;font-size:10px" class="btn" >{{machine.MachineName}}</button>  
+               <button  (click)="machineClick(event,machine.MachineName)" *ngIf="machine.MachineState =='Orange'" style="margin-left:-60px;min-width: 167px;background-color: #f7a522;margin-bottom:3px;font-size:10px" class="btn" >{{machine.MachineName}}</button> 
+               <button (click)="machineClick(event,machine.MachineName)" *ngIf="machine.MachineState =='Green'" style="margin-left:-60px;min-width: 167px;background-color: #55aa67;margin-bottom:3px;font-size:10px" class="btn" >{{machine.MachineName}}</button> 
+               <button  (click)="machineClick(event,machine.MachineName)" *ngIf="machine.MachineState =='Yellow'" style="margin-left:-60px;min-width: 167px;background-color: #efed51;margin-bottom:3px;font-size:10px" class="btn" >{{machine.MachineName}}</button> 
+               <button (click)="machineClick(event,machine.MachineName)" *ngIf="machine.MachineState =='Red'" style="margin-left:-60px;min-width: 167px;background-color: #ef3823;margin-bottom:3px;font-size:10px" class="btn" >{{machine.MachineName}}</button> 
+             </div>
+             
+           </ul>
+         </ba-card>
+         <pagination-controls id="first" style="float: left" (pageChange)="p = $event"></pagination-controls>
+       </div>
+     </div>
+   </div>
+ </div>
+
+ <!-- fin liste machine -->
+
+ <!-- liste points -->
+ <div class="col-sm-4" style="margin-left: -23px" >
+  <div class="widgets">
+
+    <div class="row">
+      <div class="col-md-12">
+        <ba-card title="Machine Info" baCardClass="with-scroll" >
+         
+          <h4  >{{MachineSelected?.MachineName}}</h4>
+          <div style="height: 130px;width: 100%;height:20%" class="img-wrapper"><img src="/assets/img/slide8.jpg" alt=""/></div>
+          <p *ngIf="lst!=undefined">Last 10 records &rarr;</p>
+          
+          
+          
+          <div style="display: inline" *ngFor="let l of lst">
+            <button id="testButton"  *ngIf="l.Status.includes('Red')"   style="background-color: #ef3823;display: inline;"></button> 
+
+            
+            <button id="testButton" *ngIf="l.Status.includes('Green')"   style="background-color: #95a5a6;display: inline;"></button> 
+            
+            <button id="testButton"  *ngIf="l.Status.includes('Grey')"    style="background-color: gray;display: inline;"></button> 
+            
+            <button id="testButton"  *ngIf="l.Status.includes('Orange')"    style="background-color: #f7a522;display: inline;"></button> 
+            
+            <button id="testButton"  *ngIf="l.Status.includes('Yellow')"    style="background-color: #efed51  ;display: inline;"></button> 
+            
+            
+            
+          </div>
+
+
+          <div class="separator"></div>
+
+          <div class="horizontal-scroll">
+          <div class="container">
+          <div class="row">
+    <div class="col-sm-6" >
+<table style="margin-left: -30px" >
+              <thead>
+                <tr>
+                  <th class="align-right"></th>
+                  
+                 
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td ><span style="float: left;">Points:</span><span style="float: right;" *ngIf="npoints!=undefined">{{npoints[0][""]}}</span></td>
+                  
+                  
+                  
+                  
+                  
+                </tr>
+                <tr>
+                 <!-- <td *ngIf="MachineSelected.PowerUnit==undefined"><span  style="float: left;">Power Unit:</span><span style="float: right;">Undefined&nbsp;&nbsp;</span></td> -->
+                 <td ><span style="float: left;">Power Unit:</span><span *ngIf="MachineSelected.PowerUnit!=undefined" style="float: right;">&nbsp;&nbsp;{{MachineSelected?.PowerUnit}}&nbsp;&nbsp;</span></td>
+                
+                 
+                 
+                 
+               </tr>
+               <tr>
+                <!-- <td *ngIf="MachineSelected.Power==undefined"><span  style="float: left;">Power:</span><span style="float: right;">Undefined&nbsp;&nbsp;</span></td> -->
+                <td ><span style="float: left;">Power:</span><span *ngIf="MachineSelected.Power!=undefined" style="float: right;">&nbsp;&nbsp;{{MachineSelected?.Power}}&nbsp;&nbsp;</span></td>
+               
+                
+                
+              </tr>
+              <tr>
+               <!-- <td *ngIf="MachineSelected.InputSpeed==undefined"><span  style="float: left;">Input Speed:</span><span style="float: right;">Undefined&nbsp;&nbsp;</span></td> -->
+               <td ><span style="float: left;">Input Speed:</span><span *ngIf="MachineSelected.InputSpeed!=undefined" style="float: right;">&nbsp;&nbsp;{{MachineSelected?.InputSpeed}}&nbsp;&nbsp;</span></td>
+               
+               
+               
+             </tr>
+             <tr>
+               <!-- <td *ngIf="MachineSelected.InstallationDate==undefined"><span  style="float: left;">Installation Date:</span><span style="float: right;">Undefined&nbsp;&nbsp;</span></td> -->
+               <td ><span style="float: left;">Installation Date:</span><span *ngIf="MachineSelected.InstallationDate!=undefined" style="float: left;">&nbsp;&nbsp;{{MachineSelected?.InstallationDate.substring(0, 10)}}&nbsp;&nbsp;</span></td>
+              
+               
+               
+             </tr>
+
+           </tbody>
+         </table>
+
+
+
+       <div class="vertical-scroll">
+          <table class="table" style="margin-left: -40px">
+           <tr  *ngFor="let point of points">
+            <td *ngIf="point.PointState=='Green'" > <button (click)="pointClick(event,point.PointNumber,point.Dir,point.MachineID,point.PointDirName)" style="width:170px;background-color: #55aa67;margin-bottom:3px" class="btn" >{{point.PointDirName}}</button>  </td>
+             <td *ngIf="point.PointState=='Gray'" > <button (click)="pointClick(event,point.PointNumber,point.Dir,point.MachineID,point.PointDirName)" style="width:170px;background-color: #95a5a6;margin-bottom:3px" class="btn" >{{point.PointDirName}}</button>  </td>
+              <td *ngIf="point.PointState=='Orange'" > <button (click)="pointClick(event,point.PointNumber,point.Dir,point.MachineID,point.PointDirName)" style="width:170px;background-color: #f7a522;margin-bottom:3px" class="btn" >{{point.PointDirName}}</button>  </td>
+               <td *ngIf="point.PointState=='yellow'" > <button (click)="pointClick(event,point.PointNumber,point.Dir,point.MachineID,point.PointDirName)" style="width:170px;background-color: #efed51;margin-bottom:3px" class="btn" >{{point.PointDirName}}</button>  </td>
+            <td *ngIf="point.PointState=='Red'" > <button (click)="pointClick(event,point.PointNumber,point.Dir,point.MachineID,point.PointDirName)" style="width:170px;background-color: #ef3823;margin-bottom:3px" class="btn" >{{point.PointDirName}}</button>  </td>
+          </tr>
+
+
+
+
+        </table>
+      </div>
+    </div>
+    <div class="col-sm-6" >
+    
+<div class="card">     
+  <b  style="color: #ecf0f1;margin-left: 6px;font-size: 14px">Last 5 Annotations</b>
+
+    
+      <span style="margin-top: 15px"><span *ngIf="lstf!=undefined&&lstf[0]!=undefined" style="float: left;font-size: 11px;margin-left: 3px">{{lstf[0]?.Abstract}}</span></span>
+      
+
+     <span  ><span *ngIf="lstf!=undefined&&lstf[1]!=undefined" style="float: left;font-size: 11px;margin-left: 3px">{{lstf[1]?.Abstract}}</span></span>
+     <div  class="separator"></div>
+     <span ><span *ngIf="lstf!=undefined&&lstf[2]!=undefined" style="float: left;font-size: 11px;margin-left: 3px">{{lstf[2]?.Abstract}}</span></span>
+     <div  class="separator"></div>
+     <span  ><span *ngIf="lstf!=undefined&&lstf[3]!=undefined" style="float: left;font-size: 11px;margin-left: 3px">{{lstf[3]?.Abstract}}</span></span>
+     <div  class="separator"></div>
+     <span ><span *ngIf="lstf!=undefined&&lstf[4]!=undefined" style="float: left;font-size: 11px;margin-left: 3px">{{lstf[4]?.Abstract}}</span></span>
+      </div>
+
+
+
+
+ 
+    </div>
+  </div>
+</div>
+            
+         <br/>
+         
+
+     
+
+
+    </div>
+
+
+
+  </ba-card>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- fiiiin list point -->
+<!-- liste courbes -->
+
+<!-- liste machine -->
+
+
+<div class="col-sm-6" >
+
+  <div id ="London" class="tabcontent hid">
+
+
+
+
+
+   <div style="" id="chartrmss" [style.width.%]="110" [style.height.px]="210"></div>
+  
+   <div class="separator"></div>
+
+   <div id="chartpeak" [style.width.%]="110" [style.height.px]="210"></div>
+   <div class="separator"></div>
+ 
+   <div id="chartcf" [style.width.%]="110" [style.height.px]="210"></div>
+   <div class="separator"></div>
+   <div id="chartovelo" [style.width.%]="110" [style.height.px]="210"></div>
+   <div class="separator"></div>
+   <div id="chartb1" [style.width.%]="110" [style.height.px]="210"></div>
+   <!-- here -->
+   <div class="separator"></div>
+   <div id="chartb2" [style.width.%]="110" [style.height.px]="210"></div>
+   <div class="separator"></div>
+   <div id="chartb3" [style.width.%]="110" [style.height.px]="210"></div>
+   <div class="separator"></div>
+   <div id="chartb4" [style.width.%]="110" [style.height.px]="210"></div>
+   <div class="separator"></div>
+   <div id="chartb5" [style.width.%]="110" [style.height.px]="210"></div>
+   <div class="separator"></div>
+   <div id="chartb6" [style.width.%]="110" [style.height.px]="210"></div>
+   <div class="separator"></div>
+   <div id="chartbspeed" [style.width.%]="110" [style.height.px]="210"></div>
+   
+ </div>
+
+ <div id ="Paris" class="tabcontent nhid" >
+
+  <div class="vertical-scroll">
+    <div class="widgets">
+      <div class="row">
+        <div class="col-md-12">
+
+          <ba-card title="Machines" baCardClass="with-scroll" >
+            <table class="table">
+              <tr>
+                <th>PEAK</th>
+                <th>RMS</th>
+                <th>KU</th>
+                <th>CF</th>
+                <th>B1</th>
+                <th>B2</th>
+                <th>B3</th>
+                <th>B4</th>
+                <th>B5</th>
+                <th>B6</th>
+                <th>Speed</th>
+              </tr>
+              <tr *ngFor="let info of pointsdet| paginate: { id:'second', itemsPerPage: 11, currentPage: p1 }"> 
+                <td>{{info.PEAK}}</td>
+                <td>{{info.RMS}}</td>
+                <td>{{info.KU}}</td>
+                <td>{{info.CF}}</td>
+                <td>{{info.B1}}</td>
+                <td>{{info.B2}}</td>
+                <td>{{info.B3}}</td>
+                <td>{{info.B4}}</td>
+                <td>{{info.B5}}</td>
+                <td>{{info.B6}}</td>
+                <td>{{info.Speed}}</td>
+              </tr>
+              
+            </table>
+            <pagination-controls   style="float: left" (pageChange)="p1 = $event"  id="second"></pagination-controls>
+
+
+
+            
+          <!--   <div id="charttable"  style="margin-top:30px"  [style.height.px]="150"></div> -->
+          </ba-card></div></div></div></div></div></div></div>

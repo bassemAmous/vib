@@ -1,0 +1,75 @@
+  <div class="auth-main">
+<img style="position: absolute;top: 5px;left: 5px;width:100px"
+ src="/assets/img/betavib.png">
+ <img style="position: absolute;top: 3px;right: 5px;width:20px"
+ src="/assets/img/en.png">
+ <img style="position: absolute;top: 27px;right: 5px;width:20px"
+ src="/assets/img/fr.png">
+ <img style="position: absolute;top: 52px;right: 5px;width:20px"
+ src="/assets/img/sp.png">
+ <img style="position: absolute;bottom: 5px;right: 1px;width:25px"
+ src="/assets/img/website.png">
+ <img style="position: absolute;bottom: 5px;right: 30px;width:22px"
+ src="/assets/img/youtube.png">
+ <img style="position: absolute;bottom: 7px;right: 60px;width:20px"
+ src="/assets/img/Linkedin.png">
+<img style="position: absolute;bottom: 2px;right: 83px;width:31px"
+ src="/assets/img/info.png">
+ <img style="position: absolute;bottom: 5px;left: 3px;width:39px"
+ src="/assets/img/Settings.png"><h5 style="position: absolute;bottom: 5px;left: 45px;width:39px"> Settings</h5>
+<div style="font-size:50px; display:inline;
+  height:250px;
+  width:1px;
+  border:1px inset;
+  margin:5px;margin-left:470px"><div class="vr"></div></div>
+  <div class="auth-block" style="margin-left:200px">
+  <img style="width:25px;height:20px;margin-left:40px;margin-bottom:3px" src="/assets/img/cloud1.png">
+  <img style="margin-left:-700px;margin-bottom:-200px;" src="/assets/img/vib.png">
+    <h2 style="margin-left:90px;margin-top: -27px" translate>Login to <span  id="half1">Vib</span><span id="half2">Works</span></h2>
+
+
+  
+
+    <form style="margin-top: 15px" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+      <div class="form-group row" >
+        <label for="inputEmail3"  class="col-sm-3 control-label" translate>IP Address</label>
+
+        <div  class="col-sm-5">
+          <input [formControl]="ipaddress"  [(ngModel)]="ip"  (keyup)="onKey($event)" type="text" class="form-control" id="inputEmail3" placeholder="Ipaddress">
+        </div>
+      </div>
+      <div class="form-group row" >
+        <label for="inputPassword3" class="col-sm-3 control-label" translate>User</label>
+
+        <div class="col-sm-5">
+          <input [formControl]="user" [(ngModel)]="log"  (keyup)="onKey($event)" type="text" class="form-control" id="inputPassword3" placeholder="user">
+        </div>
+      </div>
+       <div class="form-group row" >
+        <label for="inputPassword3" (keyup)="onKey($event)" class="col-sm-3 control-label" translate>Password</label>
+
+        <div class="col-sm-5">
+          <input [formControl]="password" [(ngModel)]="pwd" (keyup)="onKey($event)" type="password" class="form-control" id="inputPassword3" placeholder="password">
+        </div>
+      </div>
+      <div class="form-group row" >
+        <div class="offset-sm-2 col-sm-10">
+          <button id="connectbtn"  [disabled]="dropshow" type="submit" class="btn btn-default btn-auth"  translate #btn>Connect</button>
+          <button *ngIf="dropshow" style="margin-top: 7px" id="nextbtn"   type="submit" class="btn btn-default btn-auth"  translate #btn1>Next</button>
+          <img *ngIf="loading"  src="http://mo16.alzheimersproam.ca/assets/images/blue-loading-wheel.gif" style="width:60px;margin-left:140px;margin-top:-190px" />
+
+        </div>
+      </div>
+      <div *ngIf="dropshow" class="form-group row" style="width:170px;float:right">
+        <select [formControl]="database"  class="form-control" id="exampleSelect1">
+        <option *ngFor="let db of databases">{{db}}</option>
+
+      </select>
+      </div>
+      <div *ngIf="error" style="width:290px;margin-left:130px" class="alert alert-danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{error}}</div>
+    </form>
+
+
+
+  </div>
+</div>

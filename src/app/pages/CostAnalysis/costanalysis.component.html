@@ -1,0 +1,123 @@
+<router-outlet></router-outlet>
+<md-spinner *ngIf="isLoading" style="width:60px;background-position : center;position: fixed;
+  left: 50%;
+  top: 50%; z-index: 100;"></md-spinner>
+ <div class="row" style="margin-left: -40px">
+
+    <div class="col-lg-12" >
+     <div  class="row">
+        <div class="col-lg-6">
+       <ba-card class="col-xlg-6 col-xl-6 col-lg-12 col-sm-12 col-12"
+                     title="Failures Distribution" baCardClass="with-scroll">
+
+<div class="channels-block" style="height: 590px">
+
+  <div style="margin-top: 90px" class="chart-bg"></div>
+  <div style="margin-top: 90px" class="traffic-chart" id="trafficChart">
+    <div class="canvas-holder">
+      <canvas  id="chart-areaaf" width="300px" height="300px"></canvas>
+      <div class="traffic-text">
+       
+        <span translate>Total:</span>
+      </div>
+    </div>
+    <div class="traffic-legend"></div>
+  </div>
+
+  <div class="channels-info">
+    <div>
+      <div class="channels-info-item" *ngFor="let item of doughnutDataf">
+        <div class="legend-color" [ngStyle]="{'background-color': item.color }"></div>
+        <p>{{ item.label }}<span class="channel-number">+{{ item.percentage }}%</span></p>
+        <div class="progress progress-sm channel-progress">
+          <div class="progress-bar" role="progressbar"
+               [attr.aria-valuenow]="item.percentage" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: item.percentage + '%' }">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </ba-card>
+
+        </div>
+        <div class="col-lg-6" >
+           <ba-card style="display:inline-block;margin-left: 20px" title="Failures occurrence" baCardClass="with-scroll" >
+      <div  id="chartdiv44"  [style.height.px]="600"></div>
+      </ba-card>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+           <ba-card title="" baCardClass="with-scroll"  >
+     <div class="vertical-scroll" >
+  <table class="table"  >
+  <tr style="color: #16a085;font-size: 19">
+      <th >MachineName</th>
+      <th >ComponentName</th>
+      <th >BrisType</th>
+      <th >BrisDate</th>
+      <th >NbTech</th>
+      <th >TauxHoraire</th>
+      <th >NbHeurs</th>
+      <th >CoutPiece</th>
+      <th >Total1</th>
+      <th >CoutAdmin</th>
+      <th >CoutOp</th>
+      <th >HeureProd</th>
+      <th >PerteParHeure</th>
+      <th >PertesTotale</th>
+      <th >BrisMateriel</th>
+      <th >Total2</th>
+      <th >CostIfUndetected</th>
+    </tr>
+    <tr *ngFor="let tab of table ">
+      <td style="font-size: 12px">{{tab.MachineName}}</td>
+      <td>{{tab.ComponentName}}</td>
+      <td>{{tab.BrisType}}</td>
+      <td style="font-size: 12px">{{tab.BrisDate.substring(0, 10)}}</td>
+      <td>{{tab.NbTech}}</td>
+      <td>{{tab.TauxHoraire}}</td>
+      <td>{{tab.NbHeurs}}</td>
+      <td>{{tab.CoutPiece}}</td>
+      <td>{{tab.Total1}}</td>
+      <td>{{tab.CoutAdmin}}</td>
+      <td>{{tab.CoutOp}}</td>
+      <td>{{tab.HeureProd}}</td>
+      <td>{{tab.PerteParHeure}}</td>
+      <td>{{tab.PertesTotale}}</td>
+      <td>{{tab.BrisMateriel}}</td>
+      <td>{{tab.Total2}}</td>
+      <td>{{tab.CostIfUndetected}}</td>
+    </tr>
+   
+    
+  </table>
+</div>
+</ba-card>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

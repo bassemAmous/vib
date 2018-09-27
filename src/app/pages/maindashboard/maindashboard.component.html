@@ -1,0 +1,192 @@
+<router-outlet></router-outlet>
+<!-- <img *ngIf="isLoading"  src="http://mo16.alzheimersproam.ca/assets/images/blue-loading-wheel.gif" style="width:60px;background-position : center;position: fixed;
+  left: 50%;
+  top: 50%; z-index: 100; pointer-events: none;" /> -->
+  <md-spinner *ngIf="isLoading" style="width:60px;background-position : center;position: fixed;
+  left: 50%;
+  top: 50%; z-index: 100;"></md-spinner>
+ 
+  <div id="row11" class="row" style="margin-left: -50px;">
+  <div  class="col-sm-6" >
+    <div  class="widgets">
+
+      <div class="row">
+        <div id="currentassets" class="col-md-12"  >
+          <ba-card  class="col-xlg-6 col-xl-6 col-lg-12 col-sm-12 col-12"
+                     title="Current Assets State" baCardClass="traffic-panel medium-card">
+
+<div class="channels-block" style="margin-top: 20px">
+
+  <div class="chart-bg"></div>
+  <div class="traffic-chart" id="trafficChart">
+    <div class="canvas-holder">
+      <canvas id="chart-areaa" width="300px" height="300px"></canvas>
+      <div class="traffic-text">
+       
+        <span translate>Total: {{total}}</span>
+      </div>
+    </div>
+    <div class="traffic-legend"></div>
+  </div>
+
+
+  <div class="channels-info">
+    <div>
+      <div class="channels-info-item" *ngFor="let item of doughnutData">
+        <div class="legend-color" [ngStyle]="{'background-color': item.color }"></div>
+        <p>{{ item.label }}<span class="channel-number">+{{ item.percentage }}%</span></p>
+        <div class="progress progress-sm channel-progress">
+          <div class="progress-bar" role="progressbar"
+               [attr.aria-valuenow]="item.percentage" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: item.percentage + '%' }">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </ba-card>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div class="col-sm-6" >
+  <div class="widgets">
+
+    <div class="row" >
+      <div class="col-md-12">
+
+
+
+   <div class="col-md-12" >
+         <div class="btn-group" style="margin-right: 50px">
+      <button (click)="year($event)" style="background-color: #2c3e50;"  type="button" id="year" name="button" class="btn btn-primary">1Y</button>
+      
+        <button (click)="month($event)" id="month"  name="button" class="btn btn-primary">1M</button>
+        </div>
+        <button class="btn btn-primary" id="ovelo"  type="button" (click)="ovelo($event)" style=" background-color: #2c3e50;min-width: 80px;max-width: 80px">Velocity</button>
+        <button  style="min-width: 80px;max-width: 80px" (click)="rms($event)"  type="button" id="rms" class="btn btn-primary " >RMS</button>
+        <button style="min-width: 80px;max-width: 80px" (click)="peak($event)" id="peak" class="btn btn-primary "  type="button" >PEAK</button>
+        <button style="min-width: 80px;max-width: 80px"  (click)="cf($event)" id="cf" type="button" class="btn btn-primary " >CF</button>
+        <button style="min-width: 80px;max-width: 80px" (click)="ku($event)" id="ku" type="button" class="btn btn-primary " >KU</button>
+   </div>
+<hr>
+  
+
+
+
+<!-- 
+        <span  style="display: inline;margin-left: -20px">
+          <button  (click)="year($event)"  id="year" style="background-color: #2c3e50"  type="button" class="btn btn-primary">1Y</button>
+          <button (click)="month($event)" id="month"   style="margin-left: 6px" type="button" class="btn btn-primary">1M</button>
+
+        
+          <button  (click)="ovelo($event)" style="background-color: #2c3e50;margin-left: 43px;width:90px"   id="ovelo"  type="button" class="btn btn-primary">Velocity</button>
+          <button (click)="rms($event)" id="rms"   style="margin-left: 6px;width:90px" type="button" class="btn btn-primary">RMS</button>
+          <button (click)="peak($event)" id="peak"   style="margin-left: 6px;width:90px" type="button" class="btn btn-primary">PEAK</button>
+          <button (click)="cf($event)" id="cf"   style="margin-left: 6px;width:90px" type="button" class="btn btn-primary">cf</button>
+          <button (click)="ku($event)" id="ku"   style="margin-left: 6px;width:90px" type="button" class="btn btn-primary">Ku</button>
+       </span> -->
+        <ba-card title="Over All Dynamic Behavior" baCardClass="with-scroll">
+         <div id="chartdiv2"  [style.height.px]="310"></div>
+
+       </ba-card>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+<!-- <span style="display: inline;">
+  <button  (click)="assetsyear($event)" style="background-color: #2c3e50"  id="yearasset"  type="button" class="btn btn-primary">1Y</button>
+  <button (click)="assetsmonth($event)" id="monthasset"   style="margin-left: 6px" type="button" class="btn btn-primary">1M</button>
+
+</span> -->
+ <div class="btn-group" >
+      <button (click)="assetsyear($event)" style="background-color: #2c3e50"  id="yearasset"  type="button"  name="button" class="btn btn-primary">1Y</button>
+      
+        <button (click)="assetsmonth($event)" id="monthasset"   name="button" class="btn btn-primary">1M</button>
+        </div>
+<div id="row12" class="row" style="margin-left: -50px" >
+  <div class="col-sm-6" >
+    <div class="widgets">
+
+      <div class="row">
+        <div class="col-md-12">
+          <ba-card title="Assets Criticality over time" baCardClass="with-scroll">
+            <div id="chartdiv1" [style.width.%]="100" [style.height.px]="300"></div>
+          </ba-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-5" >
+    <div class="widgets">
+
+      <div class="row">
+        <div class="col-md-12">
+          <ba-card title="Measurements" baCardClass="with-scroll">
+            <div  id="chartdiv3"  [style.height.px]="300"></div>
+
+          </ba-card>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--   <div class="col-sm-1"  style="margin-left:-35px;margin-top:145px">
+    <div class="widgets">
+
+      <div class="row">
+        <div class="col-md-1">
+          <ba-card title="" >
+           <div class="button-wrapper" >
+            <button   (click)="mesurmentsyear($event)"  id="mesurmentsyear" type="button" class="btn btn-primary">1Y</button><br/><br/>
+            <button  (click)="mesurmentsmonth($event)"  id="mesurmentsmonth" type="button" class="btn btn-primary">1M</button><br/><br/>
+
+          </div>
+        </ba-card>
+      </div>
+    </div>
+  </div>
+</div> -->
+</div>
+
+
+
+
+
+<!-- <div class="row">
+
+<ba-card class="col-xlg-6 col-xl-6 col-lg-12 col-sm-12 col-12"
+                     title="Current Assets State" baCardClass="traffic-panel medium-card">
+
+<div class="channels-block">
+
+  <div class="chart-bg"></div>
+  <div class="traffic-chart" id="trafficChart">
+    <div class="canvas-holder">
+      <canvas id="chart-areaa" width="300px" height="300px"></canvas>
+      <div class="traffic-text">
+       
+        <span translate>Total: {{total}}</span>
+      </div>
+    </div>
+    <div class="traffic-legend"></div>
+  </div>
+
+  <div class="channels-info">
+    <div>
+      <div class="channels-info-item" *ngFor="let item of doughnutData">
+        <div class="legend-color" [ngStyle]="{'background-color': item.color }"></div>
+        <p>{{ item.label }}<span class="channel-number">+{{ item.percentage }}%</span></p>
+        <div class="progress progress-sm channel-progress">
+          <div class="progress-bar" role="progressbar"
+               [attr.aria-valuenow]="item.percentage" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: item.percentage + '%' }">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </ba-card>
+
+
+  </div> -->

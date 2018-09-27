@@ -1,0 +1,24 @@
+<div class="page-top clearfix" baScrollPosition maxHeight="50" (scrollChange)="scrolledChanged($event)"
+     [ngClass]="{scrolled: isScrolled}">
+  <a routerLink="/pages/maindashboard" class="al-logo clearfix"><span>Vib</span>Works</a>
+  <a href (click)="toggleMenu()" class="collapse-menu-link ion-navicon"></a>
+
+  <!-- <div class="search">
+    <i class="ion-ios-search-strong" ng-click="startSearch()"></i>
+    <input id="searchInput" type="text" placeholder="Search for...">
+  </div> -->
+  <div class="user-profile clearfix">
+    <div class="dropdown al-user-profile">
+      <a class="profile-toggle-link dropdown-toggle" id="user-profile-dd" data-toggle="dropdown" aria-expanded="false">
+        <img src="https://cdn2.iconfinder.com/data/icons/business-process-1/512/client-128.png">
+      </a>
+      <ul class="dropdown-menu top-dropdown-menu profile-dropdown" aria-labelledby="user-profile-dd">
+        <!-- <li class="dropdown-item"><a href><i class="fa fa-user"></i>Profile</a></li>
+        <li class="dropdown-item"><a href><i class="fa fa-cog"></i>Settings</a></li> -->
+        <li (click)="login()" class="dropdown-item"><a href class="signout"  ><i class="fa fa-power-off"></i>Sign out</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+<!-- [routerLink]="['/login']" -->
